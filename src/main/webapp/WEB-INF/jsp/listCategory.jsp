@@ -27,9 +27,14 @@
     </table>
     <br>
     <div>
+        <!-- 这是地址栏参数。前面没有斜线就是相对当前路径加上这个地址。这是相对路径的写法。 -->
         <a href="?start=0">[首  页]</a>
-        <a href="?start=${page.number-1}">[上一页]</a>
-        <a href="?start=${page.number+1}">[下一页]</a>
+        <c:if test="${page.number>0}">
+            <a href="?start=${page.number-1}">[上一页]</a>
+        </c:if>
+        <c:if test="${page.number<page.totalPages-1}">
+            <a href="?start=${page.number+1}">[下一页]</a>
+        </c:if>
         <a href="?start=${page.totalPages-1}">[末  页]</a>
     </div>
     <br>
