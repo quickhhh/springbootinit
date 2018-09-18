@@ -16,5 +16,5 @@ server:
     servlet:
       context-path: /test
 mybatis:
-  mapper-locations: classpath:com/example/panda/dao/*.xml
+  mapper-locations: classpath:com/example/panda/mapper/*.xml
   type-aliases-package: com.example.panda.pojo
