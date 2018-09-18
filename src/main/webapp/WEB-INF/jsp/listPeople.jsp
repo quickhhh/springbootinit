@@ -27,10 +27,17 @@
     </table>
     <br>
     <div>
-        <a href="?start=1">[首  页]</a>
-        <a href="?start=${page.pageNum-1}">[上一页]</a>
-        <a href="?start=${page.pageNum+1}">[下一页]</a>
-        <a href="?start=${page.pages}">[末  页]</a>
+        <p>一共${page.pages}页,共条${page.total}记录</p>
+        <p>第${page.pageNum}页</p>
+        <a href="?start=${page.firstPage}">第一页</a>
+        <c:if test="${page.pageNum != 1}">
+            <a href="?start=${page.prePage}">上一页</a>
+        </c:if>
+        <c:set var="salary" scope="session" value="${page.pageNum}"/>
+        <c:if test="${page.pageNum < page.pages}">
+            <a href="?start=${page.nextPage}">下一页</a>
+        </c:if>
+        <a href="?start=${page.lastPage}">最后页</a>
     </div>
     <br>
     <form action="addPeople" method="post">
