@@ -7,12 +7,12 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class PeopleController {
     @Autowired
     PeopleMapper peopleMapper;
@@ -27,35 +27,61 @@ public class PeopleController {
     }*/
 
     @RequestMapping("/listPeople")
-    public String listCategory(Model m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
+    public ModelAndView listCategory(ModelAndView m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
         PageHelper.startPage(start,size,"id desc");
         List<People> cs=peopleMapper.findAll();
         PageInfo<People> page = new PageInfo<>(cs);
-        m.addAttribute("page", page);
-
-        return "listPeople";
+        m.addObject("page", page);
+        m.setViewName("listPeople");
+        return m;
     }
-
 
     @RequestMapping("/addPeople")
-    public String listPeople(People c) throws Exception {
+    public ModelAndView addPeople(People c) throws Exception {
         peopleMapper.save(c);
-        return "redirect:listPeople";
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:listPeople");
+        return mv;
     }
     @RequestMapping("/deletePeople")
-    public String deletePeople(People c) throws Exception {
+    public ModelAndView deletePeople(People c) throws Exception {
         peopleMapper.delete(c.getId());
-        return "redirect:listPeople";
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:listPeople");
+        return mv;
     }
     @RequestMapping("/updatePeople")
-    public String updatePeople(People c) throws Exception {
+    public ModelAndView updatePeople(People c) throws Exception {
         peopleMapper.update(c);
-        return "redirect:listPeople";
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:listPeople");
+        return mv;
     }
     @RequestMapping("/editPeople")
-    public String listPeople(int id,Model m) throws Exception {
+    public ModelAndView getPeople(int id,Model m) throws Exception {
         People c= peopleMapper.get(id);
         m.addAttribute("c", c);
-        return "editPeople";
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("editPeople");
+        return mv;
+    }
+
+    @GetMapping("/people")
+    public List<People> listCategory(@RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
+        PageHelper.startPage(start,size,"id desc");
+        List<People> cs=peopleMapper.findAll();
+        PageInfo<People> page = new PageInfo<>(cs);
+        return page.getList();
+    }
+
+    @GetMapping("/people/{id}")
+    public People getPeople(@PathVariable("id") int id) throws Exception {
+        People c= peopleMapper.get(id);
+        return c;
+    }
+
+    @PutMapping("/people")
+    public void addJPeople(@RequestBody People c) throws Exception {
+        System.out.println("springboot接受到浏览器以JSON格式提交的数据："+c);
     }
 }

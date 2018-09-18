@@ -1,5 +1,8 @@
 package com.example.panda.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class People {
     private int id;
 
