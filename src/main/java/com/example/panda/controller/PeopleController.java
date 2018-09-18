@@ -1,8 +1,6 @@
 package com.example.panda.controller;
 
-import com.example.panda.dao.CategoryDAO;
-import com.example.panda.dao.PeopleMapper;
-import com.example.panda.pojo.Category;
+import com.example.panda.mapper.PeopleMapper;
 import com.example.panda.pojo.People;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

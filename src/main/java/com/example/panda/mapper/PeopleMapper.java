@@ -1,4 +1,4 @@
-package com.example.panda.dao;
+package com.example.panda.mapper;
 
 import com.example.panda.pojo.People;
 import org.apache.ibatis.annotations.Mapper;
