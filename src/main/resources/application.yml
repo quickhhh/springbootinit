@@ -15,6 +15,6 @@ server:
     port: 8888
     servlet:
       context-path: /test
-mybatis:
-  mapper-locations: classpath:com/example/panda/mapper/*.xml
-  type-aliases-package: com.example.panda.pojo
+#mybatis:
+#  mapper-locations: classpath:com/example/panda/mapper/*.xml
+#  type-aliases-package: com.example.panda.pojo
