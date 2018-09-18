@@ -9,8 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,7 +27,9 @@ public class CategoryController {
         return "listCategory";
     }*/
 
-    @RequestMapping("/listCategory")
+
+    //@RequestMapping("/listCategory")
+    @GetMapping("/categories")
     public String listCategory(Model m, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
         start = start<0?0:start;
         Sort sort = new Sort(Sort.Direction.ASC, "id");
@@ -38,23 +39,29 @@ public class CategoryController {
         return "listCategory";
     }
 
-    @RequestMapping("/addCategory")
+    //@RequestMapping("/addCategory")
+    @PostMapping("/categories")
     public String addCategory(Category c) throws Exception {
         categoryDAO.save(c);
-        return "redirect:listCategory";
+        return "redirect:/categories";
     }
-    @RequestMapping("/deleteCategory")
+    //@RequestMapping("/deleteCategory")
+    @DeleteMapping("/categories/{id}")
     public String deleteCategory(Category c) throws Exception {
         categoryDAO.delete(c);
-        return "redirect:listCategory";
+        return "redirect:/categories";
     }
-    @RequestMapping("/updateCategory")
+
+    //@RequestMapping("/updateCategory")
+    @PutMapping("/categories/{id}")
     public String updateCategory(Category c) throws Exception {
         categoryDAO.save(c);
-        return "redirect:listCategory";
+        return "redirect:/categories";
     }
-    @RequestMapping("/editCategory")
-    public String editCategory(int id,Model m) throws Exception {
+
+    //@RequestMapping("/editCategory")
+    @GetMapping("/categories/{id}")
+    public String editCategory(@PathVariable("id")int id,Model m) throws Exception {
         Category c= categoryDAO.getOne(id);
         m.addAttribute("c", c);
         return "editCategory";
