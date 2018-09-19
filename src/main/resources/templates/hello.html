@@ -3,11 +3,16 @@
 <head>
     <title>hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/static/css/style.css}"/>
+    <script type="text/javascript"  th:src="@{/static/js/thymeleaf.js}"></script>
+
 </head>
 <body>
-<p th:text="${name}" >name</p>
+<div class="showing">
+
+<p th:text="${name}" onclick="testFunction()" >name</p>
 <p th:text="'Hello！ ' + ${name} + '!'" >hello world</p>
 <p th:text="|Hello! ${name}!|" >hello world</p>
-afdasfasafasfsa
+</div>
 </body>
 </html>
