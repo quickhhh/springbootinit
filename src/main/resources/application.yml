@@ -15,10 +15,15 @@ spring:
       multipart:
         max-file-size: 100MB
         max-request-size: 100MB
+#spring boot 1.5.9
 server:
-    port: 8888
-    servlet:
-      context-path: /test
+  port: 8888
+  context-path: /test
+#spring boot 2.0.5
+#server:
+#    port: 8888
+#    servlet:
+#      context-path: /test
 #mybatis:
 #  mapper-locations: classpath:com/example/panda/mapper/*.xml
 #  type-aliases-package: com.example.panda.pojo
