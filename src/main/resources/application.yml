@@ -27,6 +27,11 @@ spring:
         max-idle: 8
         max-active: 8
       timeout: 0
+    thymeleaf:
+      cache: false
+      mode: HTML5
+      encoding: UTF-8
+      content-type: text/html
 #spring boot 1.5.9
 server:
   port: 8888

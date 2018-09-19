@@ -16,6 +16,7 @@ public class HelloController {
         if("bad".equals(isbad)){
             throw new Exception("bad");
         }
+        System.out.println("中文乱码");
         m.addAttribute("name","jone12321");
         return "hello";
     }
